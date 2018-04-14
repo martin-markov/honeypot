@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>731b0b32-c1b6-41c8-aa5b-edc8afe97633</ProjectGuid>
+    <ProjectGuid>{69F04CAB-354A-40BB-83A2-45476DFDA117}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Honeypot.RequestFilter</RootNamespace>
