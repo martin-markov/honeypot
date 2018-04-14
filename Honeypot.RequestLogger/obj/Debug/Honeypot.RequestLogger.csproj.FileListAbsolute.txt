@@ -1,1 +1,8 @@
-D:\Projects\HoneypotSystem\Honeypot.RequestLogger\bin\Debug\Honeypot.RequestLogger.exe.config
+D:\Projects\HoneypotSystem\Honeypot.RequestLogger\bin\Debug\Honeypot.RequestLogger.dll.config
+D:\Projects\HoneypotSystem\Honeypot.RequestLogger\bin\Debug\Honeypot.RequestLogger.dll
+D:\Projects\HoneypotSystem\Honeypot.RequestLogger\bin\Debug\Honeypot.RequestLogger.pdb
+D:\Projects\HoneypotSystem\Honeypot.RequestLogger\bin\Debug\Honeypot.Common.dll
+D:\Projects\HoneypotSystem\Honeypot.RequestLogger\bin\Debug\Honeypot.Common.pdb
+D:\Projects\HoneypotSystem\Honeypot.RequestLogger\obj\Debug\Honeypot.RequestLogger.csprojResolveAssemblyReference.cache
+D:\Projects\HoneypotSystem\Honeypot.RequestLogger\obj\Debug\Honeypot.RequestLogger.dll
+D:\Projects\HoneypotSystem\Honeypot.RequestLogger\obj\Debug\Honeypot.RequestLogger.pdb

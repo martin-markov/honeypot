@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{69F04CAB-354A-40BB-83A2-45476DFDA117}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Honeypot.RequestFilter</RootNamespace>
     <AssemblyName>Honeypot.RequestFilter</AssemblyName>
@@ -31,8 +31,32 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Honeypot.Common\Honeypot.Common.csproj">
+      <Project>{bffb67e5-2cd3-4f68-98b9-4511072fd15d}</Project>
+      <Name>Honeypot.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Honeypot.RequestLogger\Honeypot.RequestLogger.csproj">
+      <Project>{e523fd22-21ed-4100-8aa1-4cf289046892}</Project>
+      <Name>Honeypot.RequestLogger</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Filters\HoneypotFilter.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\HtmlHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
