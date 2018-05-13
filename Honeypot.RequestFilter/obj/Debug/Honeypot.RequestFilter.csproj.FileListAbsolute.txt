@@ -1,10 +1,12 @@
-D:\Projects\HoneypotSystem\Honeypot.RequestFilter\obj\Debug\Honeypot.RequestFilter.csprojResolveAssemblyReference.cache
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Honeypot.RequestFilter.dll.config
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Honeypot.RequestFilter.dll
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Honeypot.RequestFilter.pdb
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Honeypot.Common.dll
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Honeypot.RequestLogger.dll
+D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Newtonsoft.Json.dll
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Honeypot.Common.pdb
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Honeypot.RequestLogger.pdb
+D:\Projects\HoneypotSystem\Honeypot.RequestFilter\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\HoneypotSystem\Honeypot.RequestFilter\obj\Debug\Honeypot.RequestFilter.csprojResolveAssemblyReference.cache
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\obj\Debug\Honeypot.RequestFilter.dll
 D:\Projects\HoneypotSystem\Honeypot.RequestFilter\obj\Debug\Honeypot.RequestFilter.pdb

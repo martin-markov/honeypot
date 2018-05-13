@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@using MvcJqGrid
+<h2>Index</h2>
+
+<script type="text/javascript">
+    var onBefore = function () {
+        debugger;
+    }
+
+</script>
+@(Html.Grid("RecordsGrid")
+    .SetJsonReader(new MvcJqGrid.DataReaders.JsonReader { Id = "id", RepeatItems = false })
+    .SetCaption("Log Records")
+    .AddColumn(new Column("Id"))
+    .AddColumn(new Column("ClientIp"))
+    .AddColumn(new Column("ClientBrowser"))
+    .AddColumn(new Column("PostData"))
+    .AddColumn(new Column("CreatedDate"))
+    .SetUrl(Url.Action("List", "Home"))
+    .SetAutoWidth(true)
+    .SetRowNum(10)
+    .SetRowList(new[] { 10, 15, 20, 50 })
+    .SetViewRecords(true)
+    .SetPager("pager")
+    
+    .OnLoadBeforeSend("onBefore")
+    .OnLoadComplete("onBefore")
+    .OnLoadError("onBefore"))
+
