@@ -45,10 +45,10 @@ namespace Honeypot.RequestLogger
                                                ,@PostData
                                                ,@CreatedDate)";
             SqlCommand insertCmd = new SqlCommand(query, MyConnection);
-            insertCmd.Parameters.Add("ClientIp", record.ClientIP);
-            insertCmd.Parameters.Add("ClientBrowser", record.ClientBrowser);
-            insertCmd.Parameters.Add("PostData", record.PostData);
-            insertCmd.Parameters.Add("CreatedDate", record.RequestDate);
+            insertCmd.Parameters.AddWithValue("ClientIp", record.ClientIP);
+            insertCmd.Parameters.AddWithValue("ClientBrowser", record.ClientBrowser);
+            insertCmd.Parameters.AddWithValue("PostData", record.PostData);
+            insertCmd.Parameters.AddWithValue("CreatedDate", record.RequestDate);
             insertCmd.ExecuteNonQuery();
         }
 
