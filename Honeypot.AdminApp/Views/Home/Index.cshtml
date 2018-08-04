@@ -9,10 +9,18 @@
     }
 </style>
 <script type="text/javascript">
-    function longDataformatter(cellvalue, options, rowObject) {
+    function longDataFormatter(cellvalue, options, rowObject) {
         var originalVal = "<span style='display:none'>" + cellvalue + "</span>"
         var hideElem = "<button onclick='showData(this)'>Show data</button>"
         return hideElem + originalVal;
+    }
+    function booleanFormatter(cellvalue, options, rowObject) {
+        if (cellvalue === true) {
+            return "<span>Yes</span>"
+        } else if (cellvalue === false) {
+            return "<span>No</span>"
+        }
+        return "";
     }
     function showData(elem) {
         if (elem) {
@@ -28,19 +36,27 @@
     .SetCaption("Log Records")
     .AddColumn(new Column("Id")
         .SetWidth(30)
-        .SetSortable(true)
+        .SetSortable(true))
+    .AddColumn(new Column("IsBotRequest")
+        .SetLabel("Trapped request")
+        .SetCustomFormatter("booleanFormatter")
+        .SetWidth(150)
         .SetResizeable(true))
     .AddColumn(new Column("ClientIP")
+        .SetLabel("Request IP")
         .SetWidth(150))
     .AddColumn(new Column("ClientBrowser")
+        .SetLabel("Request browser")
         .SetResizeable(true)
-        .SetCustomFormatter("longDataformatter")
+        .SetCustomFormatter("longDataFormatter")
         .SetWidth(100))
     .AddColumn(new Column("PostData")
+        .SetLabel("Request data")
         .SetResizeable(true)
-        .SetCustomFormatter("longDataformatter")
+        .SetCustomFormatter("longDataFormatter")
         .SetWidth(100))
     .AddColumn(new Column("RequestDate")
+        .SetLabel("Request date")
         .SetFormatter(MvcJqGrid.Enums.Formatters.Date)
         .SetWidth(150)
         .SetResizeable(true))
@@ -49,7 +65,9 @@
     .SetRowNum(30)
     .SetRowList(new[] { 30, 50, 100 })
     .SetViewRecords(true)
-    .SetPager("pager").SetSortOnHeaderClick(true).SetShrinkToFit(true)
+    .SetPager("pager")
+    .SetSortOnHeaderClick(true)
+    .SetShrinkToFit(true)
     .SetShowAllSortIcons(true)
     .SetSortOnHeaderClick(true)
     .SetLoadOnce(true)
@@ -58,7 +76,6 @@
 
 <script type="text/javascript">
     function resizeGrid() {
-        debugger
         $("#RecordsGrid").jqGrid('setGridWidth', $(window).width() - 30);
     }
     $(window).bind('resize', function () {

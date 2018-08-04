@@ -111,6 +111,7 @@ namespace Honeypot.Common
                                   ,[ClientBrowser]
                                   ,[PostData]
                                   ,[CreatedDate]
+                                  ,[IsBotRequest]
                               FROM [dbo].[RequestLog]";
 
             SqlCommand selectCmd = new SqlCommand(query, MyConnection);
@@ -125,7 +126,8 @@ namespace Honeypot.Common
                         ClientIP = reader.GetString(1),
                         ClientBrowser = reader.GetString(2),
                         PostData = reader.GetString(3),
-                        RequestDate = reader.GetDateTime(4)
+                        RequestDate = reader.GetDateTime(4),
+                        IsBotRequest = reader.GetBoolean(5)
                     };
                     records.Add(record);
                 }

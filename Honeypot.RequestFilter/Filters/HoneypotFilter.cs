@@ -103,18 +103,19 @@ namespace Honeypot.RequestFilter
             if (IsTrapped)
             {
                 SetIsTrapped(true);
-                LogTrappedRequest(HttpContext.Current.Request);
             }
+            LogRequest(HttpContext.Current.Request);
         }
 
-        private void LogTrappedRequest(HttpRequest request)
+        private void LogRequest(HttpRequest request)
         {
             LogRecord record = new LogRecord()
             {
                 ClientIP = request.UserHostAddress,
                 ClientBrowser = request.UserAgent,
                 RequestDate = DateTime.Now,
-                PostData = GetJsonStringFromFormData(request.Form)
+                PostData = GetJsonStringFromFormData(request.Form),
+                IsBotRequest = IsTrapped
             };
             Logger.Log(record);
         }

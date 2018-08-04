@@ -15,5 +15,6 @@ namespace Honeypot.Common
         public string ClientIP { get; set; }
         public string ClientBrowser { get; set; }
         public string PostData { get; set; }
+        public bool IsBotRequest { get; set; }
     }
 }

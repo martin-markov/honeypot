@@ -38,17 +38,20 @@ namespace Honeypot.RequestLogger
                                                ([ClientIp]
                                                ,[ClientBrowser]
                                                ,[PostData]
-                                               ,[CreatedDate])
+                                               ,[CreatedDate]
+                                               ,[IsBotRequest])
                                          VALUES
                                                (@ClientIp
                                                ,@ClientBrowser
                                                ,@PostData
-                                               ,@CreatedDate)";
+                                               ,@CreatedDate
+                                               ,@IsBotRequest)";
             SqlCommand insertCmd = new SqlCommand(query, MyConnection);
             insertCmd.Parameters.AddWithValue("ClientIp", record.ClientIP);
             insertCmd.Parameters.AddWithValue("ClientBrowser", record.ClientBrowser);
             insertCmd.Parameters.AddWithValue("PostData", record.PostData);
             insertCmd.Parameters.AddWithValue("CreatedDate", record.RequestDate);
+            insertCmd.Parameters.AddWithValue("IsBotRequest", record.IsBotRequest);
             insertCmd.ExecuteNonQuery();
         }
 
