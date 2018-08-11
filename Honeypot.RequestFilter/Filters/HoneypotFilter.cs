@@ -44,6 +44,15 @@ namespace Honeypot.RequestFilter
         {
             this.honeypots = honeypots;
         }
+        /// <summary>
+        /// All public properties of the object will be added
+        /// </summary>
+        /// <param name="type"></param>
+        public HoneypotFilter(Type type)
+        {
+            var modelProps = type.GetProperties();
+            this.honeypots = modelProps.Select(x=>x.Name).ToArray();
+        }
 
         #endregion
 
@@ -69,26 +78,32 @@ namespace Honeypot.RequestFilter
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             SetIsTrapped(false);
+            if (filterContext.HttpContext.Request.HttpMethod == "GET")
+                return;
 
-            var collection = HttpContext.Current.Request.Form;
+            var requestData = HttpContext.Current.Request.Form;
+            if (requestData.Count == 0)
+                return;
 
-            foreach (string field in honeypots)
+            foreach (string honeypotField in honeypots)
             {
-                if (!string.IsNullOrWhiteSpace(collection[field]))
+                //Trap any field that is contained in the passed array of honeypotFields 
+                if (!String.IsNullOrWhiteSpace(requestData[honeypotField]))
                 {
                     isTrapped = true;
                 }
+                //if not traped set original name before hashing and appopriate value 
                 else
                 {
-                    string hashedName = HtmlHelpers.GetHashedPropertyName(field);
-                    if (collection.AllKeys.Contains(hashedName))
+                    string hashedName = HtmlHelpers.GetHashedPropertyName(honeypotField);
+                    if (requestData.AllKeys.Contains(hashedName))
                     {
                         string val = HttpContext.Current.Request.Form[hashedName];
                         foreach (var actionValue in filterContext.ActionParameters)
                         {
                             foreach (var prop in actionValue.Value.GetType().GetProperties())
                             {
-                                if (prop.Name == field && prop.CanWrite && prop.PropertyType == typeof(string))
+                                if (prop.Name == honeypotField && prop.CanWrite && prop.PropertyType == typeof(string))
                                 {
                                     if (prop.PropertyType == val.GetType())
                                     {

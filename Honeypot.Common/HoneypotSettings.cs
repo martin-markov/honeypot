@@ -12,7 +12,7 @@ namespace Honeypot.Common
         /// <summary>
         /// Get the configuration section
         /// </summary>
-        private static HoneypotSettings _settings = ConfigurationManager.GetSection("Honeypot") as HoneypotSettings;
+        private static HoneypotSettings _settings = ConfigurationManager.GetSection("HoneypotSettings") as HoneypotSettings;
 
         /// <summary>
         /// The loaded configuration section
@@ -30,50 +30,21 @@ namespace Honeypot.Common
         /// of requests is accumulated then they are sent to the persistence provider as bulk.
         /// This will minimize the impackt on the request because of logging.
         /// </summary>
-        [ConfigurationProperty("SQLServerName", DefaultValue = "", IsRequired = true)]
-        public string SQLServerName
+        [ConfigurationProperty("SQLConnectionString", DefaultValue = "", IsRequired = true)]
+        public string SQLConnectionString
         {
-            get { return (string)this.SQLServerName; }
-            set { this.SQLServerName = value; }
-        }
-
-        [ConfigurationProperty("SQLDatabaseName", DefaultValue = "", IsRequired = true)]
-        public string SQLDatabaseName
-        {
-            get { return (string)this.SQLDatabaseName; }
-            set { this.SQLDatabaseName = value; }
+            get { return (string)this["SQLConnectionString"]; }
+            set { this.SQLConnectionString = value; }
         }
 
         /// <summary>
         /// If true the logging is enabled
         /// </summary>
-        [ConfigurationProperty("Enabled", DefaultValue = true, IsRequired = false)]
-        public bool Enabled
+        [ConfigurationProperty("LogingEnabled", DefaultValue = true, IsRequired = false)]
+        public bool LogingEnabled
         {
-            get { return (bool)this["Enabled"]; }
-            set { this["Enabled"] = value; }
+            get { return (bool)this["LogingEnabled"]; }
+            set { this["LogingEnabled"] = value; }
         }
-
-        /// <summary>
-        /// Determine if the request should be logged on the BeginRequest event or on the EndRequest event
-        /// </summary>
-        [ConfigurationProperty("LogOnBeginRequest", DefaultValue = true, IsRequired = false)]
-        public bool LogOnBeginRequest
-        {
-            get { return (bool)this["LogOnBeginRequest"]; }
-            set { this["LogOnBeginRequest"] = value; }
-        }
-
-        /// <summary>
-        /// if true the URLs that are requesting files such as .css, .jpg etc. 
-        /// will be skipped and such requests will not be logged.
-        /// </summary>
-        [ConfigurationProperty("SkipFiles", DefaultValue = true, IsRequired = false)]
-        public bool SkipFiles
-        {
-            get { return (bool)this["SkipFiles"]; }
-            set { this["SkipFiles"] = value; }
-        }
-
     }
 }

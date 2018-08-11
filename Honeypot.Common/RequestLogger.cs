@@ -12,10 +12,21 @@ namespace Honeypot.Common
 
         public static void Log(LogRecord record)
         {
-            using (var logWriter = new DbManager())        
+            try
             {
-                logWriter.Log(record);
+                if (HoneypotSettings.Settings.LogingEnabled)
+                {
+                    using (var logWriter = new DbManager())
+                    {
+                        logWriter.Log(record);
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                //log exception
+            }
+            
         }
     }
 }

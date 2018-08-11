@@ -38,17 +38,21 @@ namespace Honeypot.Common
                                                ([ClientIp]
                                                ,[ClientBrowser]
                                                ,[PostData]
-                                               ,[CreatedDate])
+                                               ,[CreatedDate]
+                                               ,[IsBotRequest])
                                          VALUES
                                                (@ClientIp
                                                ,@ClientBrowser
                                                ,@PostData
-                                               ,@CreatedDate)";
+                                               ,@CreatedDate
+                                               ,@IsBotRequest)";
             SqlCommand insertCmd = new SqlCommand(query, MyConnection);
             insertCmd.Parameters.AddWithValue("ClientIp", record.ClientIP);
             insertCmd.Parameters.AddWithValue("ClientBrowser", record.ClientBrowser);
             insertCmd.Parameters.AddWithValue("PostData", record.PostData);
             insertCmd.Parameters.AddWithValue("CreatedDate", record.RequestDate);
+            insertCmd.Parameters.AddWithValue("IsBotRequest", record.IsBotRequest);
+
             insertCmd.ExecuteNonQuery();
         }
 
@@ -56,29 +60,11 @@ namespace Honeypot.Common
         {
             TerminateConnection();
         }
-
-        private string GetConnectionString()
-        {
-
-
-            //var sb = new StringBuilder();
-            //sb.Append("Data Source=");
-            //sb.Append(configDatabaseServer);
-            //sb.Append(";Initial Catalog=");
-            //sb.Append(databaseName);
-            //sb.Append(";User id=");
-            //sb.Append(databaseUserId);
-            //sb.Append(";Password=");
-            //sb.Append(databasePassword);
-            //sb.Append(";Integrated security=false;");
-            //sb.Append(";MultipleActiveResultSets=True;Max Pool Size=1000;;Connect Timeout = 30;");
-            //return sb.ToString();
-            return "Data Source=DESKTOP-KPVE2RK\\SQLSERVER;Initial Catalog=Honeypot;Integrated Security=true;";
-        }
-
         private SqlConnection GetConnection()
         {
-            SqlConnection connection = new SqlConnection(GetConnectionString());
+            string connString = HoneypotSettings.Settings.SQLConnectionString;
+
+            SqlConnection connection = new SqlConnection(connString);
 
             connection.Open();
 

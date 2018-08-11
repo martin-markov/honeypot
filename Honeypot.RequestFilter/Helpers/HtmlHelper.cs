@@ -32,14 +32,14 @@ namespace Honeypot.RequestFilter
         /// <summary>
         /// Calculates MD5 HASH
         /// </summary>
-        /// <param name="PropertyName">Name of property that needs to be hashed</param>
+        /// <param name="propertyName">Name of property that needs to be hashed</param>
         /// <returns>Hashed value of property name</returns>
-        public static string GetHashedPropertyName(string PropertyName)
+        public static string GetHashedPropertyName(string propertyName)
         {
             //Initializer session
             HttpContext.Current.Session["honeypot"] = true;
             MD5 md5 = System.Security.Cryptography.MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(string.Concat(PropertyName, HttpContext.Current.Session.SessionID));
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(String.Concat(propertyName, HttpContext.Current.Session.SessionID));
             byte[] hash = md5.ComputeHash(inputBytes);
             StringBuilder sbHashedName = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
@@ -59,7 +59,7 @@ namespace Honeypot.RequestFilter
         /// <param name="value">Value of the field</param>
         /// <param name="css">CSS class to be applied to input field</param>
         /// <returns>Returns render out MvcHtmlString for displaying on the View</returns>
-        public static MvcHtmlString HoneyPotField(this HtmlHelper helper, string name, object value, bool addLabel = true ,string inputCss = null, InputType fieldType = InputType.Text, string honeypotCss = null, InputType honeypotType = InputType.Hidden)
+        public static MvcHtmlString HoneyPotField(this HtmlHelper helper, string name, object value, bool addLabel = true , string labelContent = null, string inputCss = null, InputType fieldType = InputType.Text, string honeypotCss = null, InputType honeypotType = InputType.Hidden)
         {
             StringBuilder sbControlHtml = new StringBuilder();
             using (StringWriter stringWriter = new StringWriter())
@@ -68,17 +68,24 @@ namespace Honeypot.RequestFilter
                 {
                     HtmlInputText hashedField = new HtmlInputText(fieldType.ToString().ToLower());
                     string hashedName = GetHashedPropertyName(name);
-                    hashedField.Value = value != null ? value.ToString() : string.Empty;
+                    hashedField.Value = value != null ? value.ToString() : String.Empty;
                     hashedField.ID = hashedName;
                     hashedField.Name = hashedName;
-                    if (!string.IsNullOrWhiteSpace(inputCss))
+                    if (!String.IsNullOrWhiteSpace(inputCss))
                     {
                         hashedField.Attributes["class"] = inputCss;
                     }
                     if (addLabel)
                     {
                         HtmlGenericControl label = new HtmlGenericControl("label");
-                        label.InnerText = name;
+                        if (String.IsNullOrEmpty(labelContent))
+                        {
+                            label.InnerText = name;
+                        }
+                        else
+                        {
+                            label.InnerText = labelContent;
+                        }
                         label.Attributes.Add("for", hashedName);
                         label.Attributes.Add("style", "margin-right: 15px");
                         label.RenderControl(htmlWriter);
@@ -87,10 +94,10 @@ namespace Honeypot.RequestFilter
 
 
                     HtmlInputText hiddenField = new HtmlInputText(honeypotType.ToString().ToLower());
-                    hiddenField.Value = string.Empty;
+                    hiddenField.Value = String.Empty;
                     hiddenField.ID = name;
                     hiddenField.Name = name;
-                    if (!string.IsNullOrWhiteSpace(honeypotCss))
+                    if (!String.IsNullOrWhiteSpace(honeypotCss))
                     {
                         hiddenField.Attributes["class"] = honeypotCss;
                     }
@@ -110,12 +117,12 @@ namespace Honeypot.RequestFilter
                 {
                     HtmlTextArea hashedField = new HtmlTextArea();
                     string hashedName = GetHashedPropertyName(name);
-                    hashedField.Value = value != null ? value.ToString() : string.Empty;
+                    hashedField.Value = value != null ? value.ToString() : String.Empty;
                     hashedField.ID = hashedName;
                     hashedField.Name = hashedName;
                     hashedField.Cols = cols;
                     hashedField.Rows = rows;
-                    if (!string.IsNullOrWhiteSpace(inputCss))
+                    if (!String.IsNullOrWhiteSpace(inputCss))
                     {
                         hashedField.Attributes["class"] = inputCss;
                     }
@@ -123,12 +130,12 @@ namespace Honeypot.RequestFilter
 
 
                     HtmlTextArea hiddenField = new HtmlTextArea();
-                    hiddenField.Value = string.Empty;
+                    hiddenField.Value = String.Empty;
                     hiddenField.ID = name;
                     hiddenField.Name = name;
                     hiddenField.Rows = rows;
                     hiddenField.Cols = cols;
-                    if (!string.IsNullOrWhiteSpace(honeypotCss))
+                    if (!String.IsNullOrWhiteSpace(honeypotCss))
                     {
                         hiddenField.Attributes["class"] = honeypotCss;
                     }

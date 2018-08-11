@@ -10,16 +10,16 @@
 <form method="post" action="/Home/PostCreditCardData">
     <fieldset>
         <div class="editor-field">
-            @Html.HoneyPotField("HolderName", null)
+            @Html.HoneyPotField("HolderName", null, true, "Holder name")
         </div>
         <div class="editor-field">
-            @Html.HoneyPotField("ValidDate", null)
+            @Html.HoneyPotField("ValidDate", null, true, "Valid date")
         </div>
         <div class="editor-field">
-            @Html.HoneyPotField("CardNumber", null)
+            @Html.HoneyPotField("CardNumber", null, true, "Card number")
         </div>
         <div class="editor-field">
-            @Html.HoneyPotField("SecurityCode", null)
+            @Html.HoneyPotField("SecurityCode", null, true, "Security code")
         </div>
         <button class="ui-button" type="submit">Submit</button>
         <button type="button" onclick="sendBotData()">Submit as bot</button>

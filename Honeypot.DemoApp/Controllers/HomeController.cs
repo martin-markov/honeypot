@@ -13,8 +13,21 @@ namespace Honeypot.DemoApp
         {
             return View();
         }
+        //[HttpPost]
+        //[HoneypotFilter("HolderName", "ValidDate", "CardNumber", "SecurityCode")]
+        //public ActionResult PostCreditCardData(CreditCard model)
+        //{
+        //    if (Request.Form.AllKeys.Contains("HasHoneypotTrapped"))
+        //    {
+        //        return Json("/Home/BotPage");
+        //    }
+        //    else
+        //    {
+        //        return View("~/Views/Home/ThankYou.cshtml");
+        //    }
+        //}
         [HttpPost]
-        [HoneypotFilter("HolderName", "ValidDate", "CardNumber", "SecurityCode")]
+        [HoneypotFilter(typeof(CreditCard))]
         public ActionResult PostCreditCardData(CreditCard model)
         {
             if (Request.Form.AllKeys.Contains("HasHoneypotTrapped"))
@@ -26,6 +39,7 @@ namespace Honeypot.DemoApp
                 return View("~/Views/Home/ThankYou.cshtml");
             }
         }
+
         public ActionResult BotPage()
         {
             return View();
