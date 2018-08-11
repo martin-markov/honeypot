@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Honeypot.Common
 {
-    public class LogRecord : ILogRecord
+    public class LogRecord
     {
         public int Id { get; set; }
         public DateTime RequestDate { get; set; }

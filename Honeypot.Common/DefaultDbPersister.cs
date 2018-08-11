@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Honeypot.Common
 {
-    public class DbManager : IRequestPersister
+    public class DefaultDbPersister : IRequestPersister
     {
         SqlConnection connection;
         protected SqlConnection MyConnection
@@ -30,7 +30,6 @@ namespace Honeypot.Common
                 return connection;
             }
         }
-
 
         public void Log(LogRecord record)
         {
@@ -56,10 +55,7 @@ namespace Honeypot.Common
             insertCmd.ExecuteNonQuery();
         }
 
-        public void Dispose()
-        {
-            TerminateConnection();
-        }
+        
         private SqlConnection GetConnection()
         {
             string connString = HoneypotSettings.Settings.SQLConnectionString;
@@ -79,7 +75,10 @@ namespace Honeypot.Common
             return connection;
         }
 
-
+        public void Dispose()
+        {
+            TerminateConnection();
+        }
         private void TerminateConnection()
         {
             if (connection != null)
@@ -88,37 +87,6 @@ namespace Honeypot.Common
                 connection.Dispose();
                 connection = null;
             }
-        }
-
-        public List<LogRecord> GetAllLogRecords()
-        {
-            string query = @"SELECT [Id]
-                                  ,[ClientIp]
-                                  ,[ClientBrowser]
-                                  ,[PostData]
-                                  ,[CreatedDate]
-                                  ,[IsBotRequest]
-                              FROM [dbo].[RequestLog]";
-
-            SqlCommand selectCmd = new SqlCommand(query, MyConnection);
-            List<LogRecord> records = new List<LogRecord>();
-            using (SqlDataReader reader = selectCmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    var record = new LogRecord()
-                    {
-                        Id = reader.GetInt32(0),
-                        ClientIP = reader.GetString(1),
-                        ClientBrowser = reader.GetString(2),
-                        PostData = reader.GetString(3),
-                        RequestDate = reader.GetDateTime(4),
-                        IsBotRequest = reader.GetBoolean(5)
-                    };
-                    records.Add(record);
-                }
-            }
-            return records;
         }
     }
 }

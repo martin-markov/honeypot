@@ -33,7 +33,11 @@ namespace Honeypot.Common
         [ConfigurationProperty("SQLConnectionString", DefaultValue = "", IsRequired = true)]
         public string SQLConnectionString
         {
-            get { return (string)this["SQLConnectionString"]; }
+            get
+            {
+                string val = (string)this["SQLConnectionString"];
+                return val.Replace("\\\\", "\\");
+            }
             set { this.SQLConnectionString = value; }
         }
 
@@ -45,6 +49,16 @@ namespace Honeypot.Common
         {
             get { return (bool)this["LogingEnabled"]; }
             set { this["LogingEnabled"] = value; }
+        }
+
+        /// <summary>
+        /// Request persister type
+        /// </summary>
+        [ConfigurationProperty("RequestPersister", DefaultValue = "Honeypot.Common.DbPersister", IsRequired = false)]
+        public string RequestPersister
+        {
+            get { return (string)this["RequestPersister"]; }
+            set { this["RequestPersister"] = value; }
         }
     }
 }

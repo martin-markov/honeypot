@@ -8,21 +8,21 @@ namespace Honeypot.Common
 {
     public static class Logger
     {
-        private static Type persistenceType = Type.GetType("Honeypot.RequestLogger.DbPersister");
 
         public static void Log(LogRecord record)
         {
             try
             {
+                Type requestPersister = TypeHelper.GetTypeFromAllAssemblies(HoneypotSettings.Settings.RequestPersister);
                 if (HoneypotSettings.Settings.LogingEnabled)
                 {
-                    using (var logWriter = new DbManager())
+                    using (var logWriter = Activator.CreateInstance(requestPersister) as IRequestPersister)
                     {
                         logWriter.Log(record);
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //log exception
             }

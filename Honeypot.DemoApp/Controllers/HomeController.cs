@@ -30,9 +30,10 @@ namespace Honeypot.DemoApp
         [HoneypotFilter(typeof(CreditCard))]
         public ActionResult PostCreditCardData(CreditCard model)
         {
-            if (Request.Form.AllKeys.Contains("HasHoneypotTrapped"))
+            if (HttpContext.Request.HasHoneypotTrapped())
             {
                 return Json("/Home/BotPage");
+
             }
             else
             {

@@ -124,6 +124,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DB\DbPersister.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,6 +228,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Honeypot.Common\Honeypot.Common.csproj">
+      <Project>{bffb67e5-2cd3-4f68-98b9-4511072fd15d}</Project>
+      <Name>Honeypot.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Honeypot.RequestFilter\Honeypot.RequestFilter.csproj">
       <Project>{69f04cab-354a-40bb-83a2-45476dfda117}</Project>
       <Name>Honeypot.RequestFilter</Name>

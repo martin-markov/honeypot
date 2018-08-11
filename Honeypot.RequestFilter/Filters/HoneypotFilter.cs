@@ -1,5 +1,4 @@
 ﻿using Honeypot.Common;
-using Honeypot.RequestLogger;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
