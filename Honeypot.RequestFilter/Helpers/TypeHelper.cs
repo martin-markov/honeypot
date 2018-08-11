@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Honeypot.Common
+namespace Honeypot.Helpers
 {
     public static class TypeHelper
     {

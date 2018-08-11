@@ -39,15 +39,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Honeypot.Common\Honeypot.Common.csproj">
-      <Project>{bffb67e5-2cd3-4f68-98b9-4511072fd15d}</Project>
-      <Name>Honeypot.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Filters\HoneypotFilter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="Helpers\HtmlHelper.cs" />
+    <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Interfaces\IRequestPersister.cs" />
+    <Compile Include="Logging\RequestLogger.cs" />
+    <Compile Include="Models\LogRecord.cs" />
+    <Compile Include="Persistance\DefaultDbPersister.cs" />
+    <Compile Include="Settings\HoneypotSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -55,9 +55,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

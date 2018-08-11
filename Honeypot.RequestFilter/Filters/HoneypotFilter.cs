@@ -1,4 +1,7 @@
 ﻿using Honeypot.Common;
+using Honeypot.Helpers;
+using Honeypot.Logging;
+using Honeypot.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Honeypot.RequestFilter
+namespace Honeypot.Filter
 {
     public class HoneypotFilter : ActionFilterAttribute
     {

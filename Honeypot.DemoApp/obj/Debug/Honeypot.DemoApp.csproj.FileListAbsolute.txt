@@ -1,3 +1,4 @@
+D:\Projects\HoneypotSystem\Honeypot.DemoApp\obj\Debug\Honeypot.DemoApp.csprojResolveAssemblyReference.cache
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\Honeypot.DemoApp.dll.config
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\Honeypot.DemoApp.dll
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\Honeypot.DemoApp.pdb
@@ -15,7 +16,6 @@ D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\System.Web.WebPages.Deployment.d
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\System.Web.WebPages.dll
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\System.Web.WebPages.Razor.dll
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\WebGrease.dll
-D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\Honeypot.Common.dll
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\Honeypot.RequestFilter.pdb
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\Newtonsoft.Json.xml
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\System.Web.Mvc.xml
@@ -24,7 +24,5 @@ D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\System.Web.Razor.xml
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\System.Web.WebPages.xml
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\System.Web.WebPages.Deployment.xml
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\System.Web.WebPages.Razor.xml
-D:\Projects\HoneypotSystem\Honeypot.DemoApp\bin\Honeypot.Common.pdb
-D:\Projects\HoneypotSystem\Honeypot.DemoApp\obj\Debug\Honeypot.DemoApp.csprojResolveAssemblyReference.cache
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\obj\Debug\Honeypot.DemoApp.dll
 D:\Projects\HoneypotSystem\Honeypot.DemoApp\obj\Debug\Honeypot.DemoApp.pdb

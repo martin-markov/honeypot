@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 
-namespace Honeypot.RequestFilter
+namespace Honeypot.Helpers
 {
     public static class HtmlHelpers
     {

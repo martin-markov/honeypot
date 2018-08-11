@@ -1,5 +1,5 @@
-﻿using MvcJqGrid;
-using Honeypot.Common;
+﻿using Honeypot.Models;
+using MvcJqGrid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
