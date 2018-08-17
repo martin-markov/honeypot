@@ -21,8 +21,10 @@
         <div class="editor-field">
             @Html.HoneyPotField("SecurityCode", null, true, "Security code")
         </div>
-        <button class="ui-button" type="submit">Submit</button>
-        <button type="button" onclick="sendBotData()">Submit as bot</button>
+        <div class="editor-field">
+            <button class="ui-button" type="submit">Submit</button>
+            <button type="button" onclick="sendBotData()">Submit as bot</button>
+        </div>
     </fieldset>
 </form>
 <script type="text/javascript">
