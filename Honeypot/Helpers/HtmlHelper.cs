@@ -57,6 +57,8 @@ namespace Honeypot.Helpers
         /// <param name="helper">HtmlHelper which will be extended</param>
         /// <param name="name">Name of field. Should match model field of string type</param>
         /// <param name="value">Value of the field</param>
+        /// <param name="addLabel">true if the the input has a label. Default : true</param>
+        /// <param name="labelContent">Label content. Default : name param</param>
         /// <param name="css">CSS class to be applied to input field</param>
         /// <returns>Returns render out MvcHtmlString for displaying on the View</returns>
         public static MvcHtmlString HoneyPotField(this HtmlHelper helper, string name, object value, bool addLabel = true , string labelContent = null, string inputCss = null, InputType fieldType = InputType.Text, string honeypotCss = null, InputType honeypotType = InputType.Hidden)

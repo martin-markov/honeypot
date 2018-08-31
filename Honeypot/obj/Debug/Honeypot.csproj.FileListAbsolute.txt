@@ -5,3 +5,4 @@ D:\Projects\HoneypotSystem\Honeypot\bin\Debug\Newtonsoft.Json.dll
 D:\Projects\HoneypotSystem\Honeypot\bin\Debug\Newtonsoft.Json.xml
 D:\Projects\HoneypotSystem\Honeypot\obj\Debug\Honeypot.Common.dll
 D:\Projects\HoneypotSystem\Honeypot\obj\Debug\Honeypot.Common.pdb
+D:\Projects\HoneypotSystem\Honeypot\obj\Debug\Honeypot.csprojResolveAssemblyReference.cache

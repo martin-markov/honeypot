@@ -52,6 +52,16 @@ namespace Honeypot.Settings
         }
 
         /// <summary>
+        /// If true the logging is requests should be automatically blocked
+        /// </summary>
+        [ConfigurationProperty("BlockRequests", DefaultValue = false, IsRequired = false)]
+        public bool BlockRequests
+        {
+            get { return (bool)this["BlockRequests"]; }
+            set { this["BlockRequests"] = value; }
+        }
+
+        /// <summary>
         /// Request persister type
         /// </summary>
         [ConfigurationProperty("RequestPersister", DefaultValue = "Honeypot.Persistance.DefaultDbPersister", IsRequired = false)]

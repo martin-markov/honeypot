@@ -55,7 +55,7 @@ namespace Honeypot.Filter
         public HoneypotFilter(Type type)
         {
             var modelProps = type.GetProperties();
-            this.honeypots = modelProps.Select(x=>x.Name).ToArray();
+            this.honeypots = modelProps.Select(x => x.Name).ToArray();
         }
 
         #endregion
@@ -122,18 +122,25 @@ namespace Honeypot.Filter
             if (IsTrapped)
             {
                 SetIsTrapped(true);
+                if (HoneypotSettings.Settings.BlockRequests)
+                {
+                    filterContext.HttpContext.Response.StatusCode = 403;
+                }
             }
-            LogRequest(HttpContext.Current.Request);
+            var request = HttpContext.Current.Request;
+            Task.Run(() => LogRequest(request)); ;
         }
 
-        private void LogRequest(HttpRequest request)
+        private async void LogRequest(HttpRequest request)
         {
             string recordModelNameSpace = HoneypotSettings.Settings.RecordModel;
             Type requestPersister = TypeHelper.GetTypeFromAllAssemblies(recordModelNameSpace);
             ILogRecord record = Activator.CreateInstance(requestPersister) as ILogRecord;
             record.MapModelToRequest(request, IsTrapped);
-
-            Logger.Log(record);
+            if (HoneypotSettings.Settings.LogingEnabled)
+            {
+                Logger.Log(record);
+            }
         }
         #endregion
     }

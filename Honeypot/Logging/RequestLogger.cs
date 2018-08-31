@@ -19,19 +19,16 @@ namespace Honeypot.Logging
             {
                 string persisterNameSpace = HoneypotSettings.Settings.RequestPersister;
                 Type requestPersister = TypeHelper.GetTypeFromAllAssemblies(persisterNameSpace);
-                if (HoneypotSettings.Settings.LogingEnabled)
+                using (var logWriter = Activator.CreateInstance(requestPersister) as IRequestPersister)
                 {
-                    using (var logWriter = Activator.CreateInstance(requestPersister) as IRequestPersister)
-                    {
-                        logWriter.Log(record);
-                    }
+                    logWriter.Log(record);
                 }
             }
             catch (Exception e)
             {
                 //log exception
             }
-            
+
         }
     }
 }
