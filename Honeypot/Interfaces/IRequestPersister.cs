@@ -9,6 +9,6 @@ namespace Honeypot.Interfaces
 {
     public interface IRequestPersister : IDisposable
     {
-        void Log(LogRecord record);
+        void Log(ILogRecord record);
     }
 }

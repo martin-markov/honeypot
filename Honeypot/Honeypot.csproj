@@ -50,9 +50,10 @@
     <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Interfaces\ILogRecord.cs" />
     <Compile Include="Interfaces\IRequestPersister.cs" />
     <Compile Include="Logging\RequestLogger.cs" />
-    <Compile Include="Models\LogRecord.cs" />
+    <Compile Include="Models\DefaultLogRecord.cs" />
     <Compile Include="Persistance\DefaultDbPersister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\HoneypotSettings.cs" />

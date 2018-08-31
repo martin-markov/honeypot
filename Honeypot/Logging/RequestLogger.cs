@@ -13,7 +13,7 @@ namespace Honeypot.Logging
     public static class Logger
     {
 
-        public static void Log(LogRecord record)
+        public static void Log(ILogRecord record)
         {
             try
             {

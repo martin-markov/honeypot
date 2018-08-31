@@ -1,5 +1,4 @@
 ﻿using Honeypot.Interfaces;
-using Honeypot.Models;
 using Honeypot.Settings;
 using System;
 using System.Collections.Generic;
@@ -33,8 +32,9 @@ namespace DemoApp
             }
         }
 
-        public void Log(LogRecord record)
+        public void Log(ILogRecord record)
         {
+            var log = (LogRecord)record;
             string query = @"INSERT INTO [dbo].[RequestLog]
                                                ([ClientIp]
                                                ,[ClientBrowser]
@@ -48,11 +48,11 @@ namespace DemoApp
                                                ,@CreatedDate
                                                ,@IsBotRequest)";
             SqlCommand insertCmd = new SqlCommand(query, MyConnection);
-            insertCmd.Parameters.AddWithValue("ClientIp", record.ClientIP);
-            insertCmd.Parameters.AddWithValue("ClientBrowser", record.ClientBrowser);
-            insertCmd.Parameters.AddWithValue("PostData", record.PostData);
-            insertCmd.Parameters.AddWithValue("CreatedDate", record.RequestDate);
-            insertCmd.Parameters.AddWithValue("IsBotRequest", record.IsBotRequest);
+            insertCmd.Parameters.AddWithValue("ClientIp", log.ClientIP);
+            insertCmd.Parameters.AddWithValue("ClientBrowser", log.ClientBrowser);
+            insertCmd.Parameters.AddWithValue("PostData", log.PostData);
+            insertCmd.Parameters.AddWithValue("CreatedDate", log.RequestDate);
+            insertCmd.Parameters.AddWithValue("IsBotRequest", log.IsBotRequest);
 
             insertCmd.ExecuteNonQuery();
         }

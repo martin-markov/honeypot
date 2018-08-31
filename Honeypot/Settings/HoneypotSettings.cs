@@ -60,5 +60,15 @@ namespace Honeypot.Settings
             get { return (string)this["RequestPersister"]; }
             set { this["RequestPersister"] = value; }
         }
+
+        /// <summary>
+        /// Request log type
+        /// </summary>
+        [ConfigurationProperty("RecordModel", DefaultValue = "Honeypot.Models.DefaultLogRecord", IsRequired = false)]
+        public string RecordModel
+        {
+            get { return (string)this["RecordModel"]; }
+            set { this["RecordModel"] = value; }
+        }
     }
 }

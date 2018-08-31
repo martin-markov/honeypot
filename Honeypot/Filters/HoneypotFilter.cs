@@ -1,7 +1,9 @@
 ﻿
 using Honeypot.Helpers;
+using Honeypot.Interfaces;
 using Honeypot.Logging;
 using Honeypot.Models;
+using Honeypot.Settings;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -126,21 +128,12 @@ namespace Honeypot.Filter
 
         private void LogRequest(HttpRequest request)
         {
-            LogRecord record = new LogRecord()
-            {
-                ClientIP = request.UserHostAddress,
-                ClientBrowser = request.UserAgent,
-                RequestDate = DateTime.Now,
-                PostData = GetJsonStringFromFormData(request.Form),
-                IsBotRequest = IsTrapped
-            };
-            Logger.Log(record);
-        }
+            string recordModelNameSpace = HoneypotSettings.Settings.RecordModel;
+            Type requestPersister = TypeHelper.GetTypeFromAllAssemblies(recordModelNameSpace);
+            ILogRecord record = Activator.CreateInstance(requestPersister) as ILogRecord;
+            record.MapModelToRequest(request, IsTrapped);
 
-        public string GetJsonStringFromFormData(NameValueCollection formData)
-        {
-            var result = Newtonsoft.Json.JsonConvert.SerializeObject(formData.AllKeys.ToDictionary(k => k, k => formData.GetValues(k).First()));
-            return result;
+            Logger.Log(record);
         }
         #endregion
     }

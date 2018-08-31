@@ -11,7 +11,7 @@ namespace Honeypot.AdminApp
     {
         public DataSourceRequestData GetLogRecords(GridSettings gridSettings)
         {
-            List<LogRecord> records = new List<LogRecord>();
+            List<DefaultLogRecord> records = new List<DefaultLogRecord>();
             using (var db = new DbManager())
             {
                 records = db.GetAllLogRecords();

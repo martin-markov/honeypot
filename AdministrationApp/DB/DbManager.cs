@@ -32,7 +32,7 @@ namespace Honeypot.AdminApp
             }
         }
 
-        public List<LogRecord> GetAllLogRecords()
+        public List<DefaultLogRecord> GetAllLogRecords()
         {
             string query = @"SELECT [Id]
                                   ,[ClientIp]
@@ -43,12 +43,12 @@ namespace Honeypot.AdminApp
                               FROM [dbo].[RequestLog]";
 
             SqlCommand selectCmd = new SqlCommand(query, MyConnection);
-            List<LogRecord> records = new List<LogRecord>();
+            List<DefaultLogRecord> records = new List<DefaultLogRecord>();
             using (SqlDataReader reader = selectCmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    var record = new LogRecord()
+                    var record = new DefaultLogRecord()
                     {
                         Id = reader.GetInt32(0),
                         ClientIP = reader.GetString(1),
