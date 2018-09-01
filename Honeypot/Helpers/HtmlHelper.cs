@@ -52,17 +52,24 @@ namespace Honeypot.Helpers
         #endregion
 
         /// <summary>
-        /// Renders out field with honeypot security check enabled
+        /// Renders out input field with honeypot security check enabled
         /// </summary>
         /// <param name="helper">HtmlHelper which will be extended</param>
         /// <param name="name">Name of field. Should match model field of string type</param>
         /// <param name="value">Value of the field</param>
-        /// <param name="addLabel">true if the the input has a label. Default : true</param>
+        /// <param name="addLabel">true if the the input has a label. Default: true</param>
         /// <param name="labelContent">Label content. Default : name param</param>
-        /// <param name="css">CSS class to be applied to input field</param>
+        /// <param name="inputCss">CSS class to be applied to the visible input field. Default: null</param>
+        /// <param name="fieldType">Enum represents the visible input type.Default: InputType.Text</param>
+        /// <param name="honeypotCss">CSS class to be applied to the trap input field</param>
+        /// <param name="honeypotType">Enum represents the input type. Default: InputType.Hidden</param>
         /// <returns>Returns render out MvcHtmlString for displaying on the View</returns>
-        public static MvcHtmlString HoneyPotField(this HtmlHelper helper, string name, object value, bool addLabel = true , string labelContent = null, string inputCss = null, InputType fieldType = InputType.Text, string honeypotCss = null, InputType honeypotType = InputType.Hidden)
+        public static MvcHtmlString HoneyPotField(this HtmlHelper helper, string name, object value, bool addLabel = true,
+            string labelContent = null, string inputCss = null, InputType fieldType = InputType.Text, string honeypotCss = null, InputType honeypotType = InputType.Hidden)
         {
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
+
             StringBuilder sbControlHtml = new StringBuilder();
             using (StringWriter stringWriter = new StringWriter())
             {
@@ -110,6 +117,17 @@ namespace Honeypot.Helpers
             return new MvcHtmlString(sbControlHtml.ToString());
         }
 
+        /// <summary>
+        /// Renders out textarea with honeypot security check enabled
+        /// </summary>
+        /// <param name="helper">HtmlHelper which will be extended</param>
+        /// <param name="name">Name of field. Should match model field of string type</param>
+        /// <param name="value">Value of the field</param>
+        /// <param name="cols">columns in the text area</param>
+        /// <param name="rows">rows in the text area</param>
+        /// <param name="inputCss">textarea css</param>
+        /// <param name="honeypotCss">honeypot css</param>
+        /// <returns>Returns render out MvcHtmlString for displaying on the View</returns>
         public static MvcHtmlString HoneyPotTextArea(this HtmlHelper helper, string name, object value, int cols, int rows, string inputCss = null, string honeypotCss = null)
         {
             StringBuilder sbControlHtml = new StringBuilder();

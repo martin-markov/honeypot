@@ -30,7 +30,7 @@ namespace Honeypot.Settings
         /// of requests is accumulated then they are sent to the persistence provider as bulk.
         /// This will minimize the impackt on the request because of logging.
         /// </summary>
-        [ConfigurationProperty("SQLConnectionString", DefaultValue = "", IsRequired = true)]
+        [ConfigurationProperty("SQLConnectionString", DefaultValue = "", IsRequired = false)]
         public string SQLConnectionString
         {
             get
@@ -64,7 +64,7 @@ namespace Honeypot.Settings
         /// <summary>
         /// Request persister type
         /// </summary>
-        [ConfigurationProperty("RequestPersister", DefaultValue = "Honeypot.Persistance.DefaultDbPersister", IsRequired = false)]
+        [ConfigurationProperty("RequestPersister", DefaultValue = "Honeypot.Persistance.DefaultFilePersister", IsRequired = false)]
         public string RequestPersister
         {
             get { return (string)this["RequestPersister"]; }

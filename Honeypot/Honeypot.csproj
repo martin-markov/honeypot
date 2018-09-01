@@ -55,6 +55,7 @@
     <Compile Include="Logging\RequestLogger.cs" />
     <Compile Include="Models\DefaultLogRecord.cs" />
     <Compile Include="Persistance\DefaultDbPersister.cs" />
+    <Compile Include="Persistance\DefaultFilePersister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\HoneypotSettings.cs" />
   </ItemGroup>

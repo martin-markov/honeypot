@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Honeypot.Persistance
 {
-    public class DefaultDbPersister : IRequestPersister
+    internal class DefaultDbPersister : IRequestPersister
     {
         SqlConnection connection;
         protected SqlConnection MyConnection

@@ -60,24 +60,6 @@ namespace Honeypot.Filter
 
         #endregion
 
-        #region Methods
-        /// <summary>
-        /// Set IsTrapped propery and HttpRequest form field
-        /// </summary>
-        /// <param name="value">Trap triggered or not</param>
-        private void SetIsTrapped(bool value)
-        {
-            this.isTrapped = value;
-            if (value)
-            {
-                var collection = HttpContext.Current.Request.Form;
-                var propInfo = collection.GetType().GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
-                propInfo.SetValue(collection, false, new object[] { });
-                collection.Add("HasHoneypotTrapped", true.ToString());
-            }
-        }
-        #endregion
-
         #region Attribute handler methods
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -143,6 +125,25 @@ namespace Honeypot.Filter
             }
         }
         #endregion
+        #region Methods
+        /// <summary>
+        /// Set IsTrapped propery and HttpRequest form field
+        /// </summary>
+        /// <param name="value">Trap triggered or not</param>
+        private void SetIsTrapped(bool value)
+        {
+            this.isTrapped = value;
+            if (value)
+            {
+                var collection = HttpContext.Current.Request.Form;
+                var propInfo = collection.GetType().GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
+                propInfo.SetValue(collection, false, new object[] { });
+                collection.Add("HasHoneypotTrapped", true.ToString());
+            }
+        }
+        #endregion
+
+        
     }
 }
 

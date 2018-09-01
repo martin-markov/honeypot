@@ -1,5 +1,4 @@
-﻿using Honeypot.Models;
-using MvcJqGrid;
+﻿using MvcJqGrid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace Honeypot.AdminApp
     {
         public DataSourceRequestData GetLogRecords(GridSettings gridSettings)
         {
-            List<DefaultLogRecord> records = new List<DefaultLogRecord>();
+            List<LogRecord> records = new List<LogRecord>();
             using (var db = new DbManager())
             {
                 records = db.GetAllLogRecords();

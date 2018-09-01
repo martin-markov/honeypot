@@ -10,7 +10,7 @@ using System.Web;
 
 namespace Honeypot.Models
 {
-    public class DefaultLogRecord: ILogRecord
+    internal class DefaultLogRecord : ILogRecord
     {
         public int Id { get; set; }
         public DateTime RequestDate { get; set; }
@@ -21,16 +21,24 @@ namespace Honeypot.Models
 
         public void MapModelToRequest(HttpRequest request, bool isTrapped)
         {
-             ClientIP = request.UserHostAddress;
-             ClientBrowser = request.UserAgent;
-             RequestDate = DateTime.Now;
-             PostData = GetJsonStringFromFormData(request.Form);
-             IsBotRequest = isTrapped;
+            ClientIP = request.UserHostAddress;
+            ClientBrowser = request.UserAgent;
+            RequestDate = DateTime.Now;
+            PostData = GetJsonStringFromFormData(request.Form);
+            IsBotRequest = isTrapped;
         }
         private string GetJsonStringFromFormData(NameValueCollection formData)
         {
             var result = Newtonsoft.Json.JsonConvert.SerializeObject(formData.AllKeys.ToDictionary(k => k, k => formData.GetValues(k).First()));
             return result;
+        }
+        public override string ToString()
+        {
+            return RequestDate.ToString("yyyy-MM-dd HH:mm:ss.ffff") + "|"
+                + ClientIP + "|"
+                + ClientBrowser + "|"
+                + PostData + "|"
+                + IsBotRequest;
         }
     }
 }

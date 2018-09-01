@@ -12,7 +12,6 @@ namespace Honeypot.Logging
 {
     public static class Logger
     {
-
         public static void Log(ILogRecord record)
         {
             try
@@ -28,7 +27,6 @@ namespace Honeypot.Logging
             {
                 //log exception
             }
-
         }
     }
 }

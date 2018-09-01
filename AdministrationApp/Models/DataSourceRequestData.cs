@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Honeypot.Models;
 
 namespace Honeypot.AdminApp
 {
@@ -10,7 +9,7 @@ namespace Honeypot.AdminApp
     {
         public int total { get; set; }
         public int page { get; set; }
-        public List<DefaultLogRecord> rows { get; set; }
+        public List<LogRecord> rows { get; set; }
         public int records { get; set; }
 
     }
