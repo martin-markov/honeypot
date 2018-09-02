@@ -10,7 +10,7 @@ using System.Web;
 
 namespace Honeypot.Models
 {
-    internal class DefaultLogRecord : ILogRecord
+    public class DefaultLogRecord : ILogRecord
     {
         public int Id { get; set; }
         public DateTime RequestDate { get; set; }
@@ -19,7 +19,7 @@ namespace Honeypot.Models
         public string PostData { get; set; }
         public bool IsBotRequest { get; set; }
 
-        public void MapModelToRequest(HttpRequest request, bool isTrapped)
+        public void MapModelToRequest(HttpRequest request, bool isTrapped, object additionalData = null)
         {
             ClientIP = request.UserHostAddress;
             ClientBrowser = request.UserAgent;

@@ -16,7 +16,7 @@ namespace DemoApp
         public string PostData { get; set; }
         public bool IsBotRequest { get; set; }
 
-        public void MapModelToRequest(HttpRequest request, bool isTrapped)
+        public void MapModelToRequest(HttpRequest request, bool isTrapped, object additionalData = null)
         {
             ClientIP = request.UserHostAddress;
             ClientBrowser = request.UserAgent;

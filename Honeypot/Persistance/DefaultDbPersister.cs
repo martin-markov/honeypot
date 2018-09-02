@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Honeypot.Persistance
 {
-    internal class DefaultDbPersister : IRequestPersister
+    public class DefaultDbPersister : IRequestPersister
     {
         SqlConnection connection;
         protected SqlConnection MyConnection
@@ -36,7 +36,9 @@ namespace Honeypot.Persistance
         public void Log(ILogRecord record)
         {
             var log = (DefaultLogRecord)record;
-            string query = @"INSERT INTO [dbo].[RequestLog]
+            if (TableExists())
+            {
+                string query = @"INSERT INTO [dbo].[RequestLog]
                                                ([ClientIp]
                                                ,[ClientBrowser]
                                                ,[PostData]
@@ -48,14 +50,39 @@ namespace Honeypot.Persistance
                                                ,@PostData
                                                ,@CreatedDate
                                                ,@IsBotRequest)";
-            SqlCommand insertCmd = new SqlCommand(query, MyConnection);
-            insertCmd.Parameters.AddWithValue("ClientIp", log.ClientIP);
-            insertCmd.Parameters.AddWithValue("ClientBrowser", log.ClientBrowser);
-            insertCmd.Parameters.AddWithValue("PostData", log.PostData);
-            insertCmd.Parameters.AddWithValue("CreatedDate", log.RequestDate);
-            insertCmd.Parameters.AddWithValue("IsBotRequest", log.IsBotRequest);
+                SqlCommand insertCmd = new SqlCommand(query, MyConnection);
+                insertCmd.Parameters.AddWithValue("ClientIp", log.ClientIP);
+                insertCmd.Parameters.AddWithValue("ClientBrowser", log.ClientBrowser);
+                insertCmd.Parameters.AddWithValue("PostData", log.PostData);
+                insertCmd.Parameters.AddWithValue("CreatedDate", log.RequestDate);
+                insertCmd.Parameters.AddWithValue("IsBotRequest", log.IsBotRequest);
 
-            insertCmd.ExecuteNonQuery();
+                insertCmd.ExecuteNonQuery();
+            }
+            else
+            {
+                throw new Exception("Table RequestLog does not exist");
+            }
+        }
+
+        private bool TableExists()
+        {
+            int result = 1;
+            string query = @"SELECT
+                            CASE   
+                                WHEN OBJECT_ID(N'RequestLog', N'U') IS NOT NULL THEN 1   
+                                WHEN OBJECT_ID (N'RequestLog', N'U') IS NULL THEN 0   
+                            END";
+
+            SqlCommand checkCmd = new SqlCommand(query, MyConnection);
+            using (SqlDataReader reader = checkCmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result = reader.GetInt32(0);
+                }
+            }
+            return result == 1;
         }
 
         

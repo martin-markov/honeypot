@@ -14,18 +14,11 @@ namespace Honeypot.Logging
     {
         public static void Log(ILogRecord record)
         {
-            try
+            string persisterNameSpace = HoneypotSettings.Settings.RequestPersister;
+            Type requestPersister = TypeHelper.GetTypeFromAllAssemblies(persisterNameSpace);
+            using (var logWriter = Activator.CreateInstance(requestPersister) as IRequestPersister)
             {
-                string persisterNameSpace = HoneypotSettings.Settings.RequestPersister;
-                Type requestPersister = TypeHelper.GetTypeFromAllAssemblies(persisterNameSpace);
-                using (var logWriter = Activator.CreateInstance(requestPersister) as IRequestPersister)
-                {
-                    logWriter.Log(record);
-                }
-            }
-            catch (Exception e)
-            {
-                //log exception
+                logWriter.Log(record);
             }
         }
     }

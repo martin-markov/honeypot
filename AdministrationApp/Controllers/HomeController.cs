@@ -36,5 +36,12 @@ namespace Honeypot.AdminApp
             var data = LogRecordService.GetLogRecords(gridSettings);
             return Json(data,JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult DeleteLogRecord(int id)
+        {
+            bool result = LogRecordService.DeleteLogRecord(id);
+            return Json(result);
+        }
     }
 }

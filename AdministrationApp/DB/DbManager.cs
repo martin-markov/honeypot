@@ -62,6 +62,14 @@ namespace Honeypot.AdminApp
             return records;
         }
 
+        public void DeleteLogRecord(int id)
+        {
+            string query = @"DELETE FROM [dbo].[RequestLog] WHERE Id = @Id;";
+            SqlCommand deleteCmd = new SqlCommand(query, MyConnection);
+            deleteCmd.Parameters.AddWithValue("Id", id);
+            deleteCmd.ExecuteNonQuery();
+        }
+
         public void Dispose()
         {
             TerminateConnection();
@@ -95,7 +103,5 @@ namespace Honeypot.AdminApp
                 connection = null;
             }
         }
-
-       
     }
 }

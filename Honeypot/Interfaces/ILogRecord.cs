@@ -8,12 +8,12 @@ using System.Web;
 namespace Honeypot.Interfaces
 {
     /// <summary>
-    /// Use thi interface to extend Log record with additional data
+    /// Use this Interface to extend Log record with additional data or behaviour
     /// </summary>
     public interface ILogRecord
     {
         /// <summary>
-        /// Database Id
+        /// Unique identifier
         /// </summary>
         int Id { get; set; }
         /// <summary>
@@ -33,6 +33,7 @@ namespace Honeypot.Interfaces
         /// </summary>
         /// <param name="request">Current System.Web.HttpRequest</param>
         /// <param name="isTrapped">true if request was made from bot</param>
-        void MapModelToRequest(HttpRequest request, bool isTrapped);
+        /// <param name="additionalData">additional data not contained in HttpRequest</param>
+        void MapModelToRequest(HttpRequest request, bool isTrapped, object additionalData = null);
     }
 }

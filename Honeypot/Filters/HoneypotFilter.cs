@@ -109,19 +109,21 @@ namespace Honeypot.Filter
                     filterContext.HttpContext.Response.StatusCode = 403;
                 }
             }
-            var request = HttpContext.Current.Request;
-            Task.Run(() => LogRequest(request)); ;
+            LogRequest(HttpContext.Current.Request);
         }
 
         private async void LogRequest(HttpRequest request)
         {
-            string recordModelNameSpace = HoneypotSettings.Settings.RecordModel;
-            Type requestPersister = TypeHelper.GetTypeFromAllAssemblies(recordModelNameSpace);
-            ILogRecord record = Activator.CreateInstance(requestPersister) as ILogRecord;
-            record.MapModelToRequest(request, IsTrapped);
             if (HoneypotSettings.Settings.LogingEnabled)
             {
-                Logger.Log(record);
+                string recordModelNameSpace = HoneypotSettings.Settings.RecordModel;
+                Type requestPersister = TypeHelper.GetTypeFromAllAssemblies(recordModelNameSpace);
+                ILogRecord record = Activator.CreateInstance(requestPersister) as ILogRecord;
+                if (record != null)
+                {
+                    record.MapModelToRequest(request, IsTrapped);
+                    Logger.Log(record);
+                }
             }
         }
         #endregion
@@ -143,7 +145,7 @@ namespace Honeypot.Filter
         }
         #endregion
 
-        
+
     }
 }
 

@@ -16,7 +16,7 @@ namespace DemoApp
         }
         [HttpPost]
         [HoneypotFilter("HolderName", "ValidDate", "CardNumber", "SecurityCode")]
-        public ActionResult PostCreditCardData(CreditCard model)
+        public ActionResult PostCreditCardData2(CreditCard model)
         {
             if (Request.Form.AllKeys.Contains("HasHoneypotTrapped"))
             {

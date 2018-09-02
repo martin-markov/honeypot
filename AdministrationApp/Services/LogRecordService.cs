@@ -26,5 +26,23 @@ namespace Honeypot.AdminApp
 
             return jsonData;
         }
+
+        public bool DeleteLogRecord(int id)
+        {
+            if (id == 0)
+                return true;
+            using (var db = new DbManager())
+            {
+                try
+                {
+                    db.DeleteLogRecord(id);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

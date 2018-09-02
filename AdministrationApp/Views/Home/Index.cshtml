@@ -29,6 +29,23 @@
             resizeGrid();
         }
     }
+
+    function actionFormatter(cellvalue, options, rowObject) {
+        return "<button onclick=\"deleteRecord('" + rowObject.Id + "')\">Delete</button>";
+    }
+    function deleteRecord(id) {
+        debugger;
+        if (id) {
+            $.ajax({
+                url: "/Home/DeleteLogRecord/",
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    location.reload();
+                },
+            });
+        }
+    }
 </script>
 
 @(Html.Grid("RecordsGrid")
@@ -49,34 +66,57 @@
         .SetLabel("Request browser")
         .SetResizeable(true)
         .SetCustomFormatter("longDataFormatter")
+        .SetAlign(MvcJqGrid.Enums.Align.Center)
         .SetWidth(100))
     .AddColumn(new Column("PostData")
         .SetLabel("Request data")
         .SetResizeable(true)
         .SetCustomFormatter("longDataFormatter")
+        .SetAlign(MvcJqGrid.Enums.Align.Center)
         .SetWidth(100))
     .AddColumn(new Column("RequestDate")
         .SetLabel("Request date")
         .SetFormatter(MvcJqGrid.Enums.Formatters.Date)
         .SetWidth(150)
         .SetResizeable(true))
+    .AddColumn(new Column("Action")
+        .SetLabel("Actions")
+        .SetCustomFormatter("actionFormatter")
+        .SetAlign(MvcJqGrid.Enums.Align.Center))
     .SetUrl(Url.Action("List", "Home"))
         //.SetAutoWidth(true)
     .SetRowNum(30)
     .SetRowList(new[] { 30, 50, 100 })
     .SetViewRecords(true)
-    .SetPager("pager")
+    .SetPager("jqPager")
+    .SetPgButtons(true)
     .SetSortOnHeaderClick(true)
     .SetShrinkToFit(true)
     .SetShowAllSortIcons(true)
     .SetSortOnHeaderClick(true)
     .SetLoadOnce(true)
-    .OnGridComplete("resizeGrid()"))
+    .OnGridComplete("gridComplete()"))
 
 
 <script type="text/javascript">
+    function gridComplete() {
+        resizeGrid();
+        markRows();
+    }
     function resizeGrid() {
         $("#RecordsGrid").jqGrid('setGridWidth', $(window).width() - 30);
+    }
+    function markRows() {
+        var rows = $("#RecordsGrid").getDataIDs();
+        for (var i = 0; i < rows.length; i++) {
+            var isBot = $("#RecordsGrid").getCell(rows[i], "IsBotRequest").indexOf("Yes");
+            if (isBot > 0) {
+                $("#RecordsGrid").jqGrid('setRowData', rows[i], false, { color: 'black', weightfont: 'bold', background: 'rgb(255, 99, 71)' });
+            } else {
+                $("#RecordsGrid").jqGrid('setRowData', rows[i], false, { color: 'black', weightfont: 'bold', background: 'rgb(127, 255, 0)' });
+
+            }
+        }
     }
     $(window).bind('resize', function () {
         resizeGrid();
