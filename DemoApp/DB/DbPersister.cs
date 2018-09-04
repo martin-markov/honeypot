@@ -2,6 +2,7 @@
 using Honeypot.Settings;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -60,7 +61,8 @@ namespace DemoApp
         
         private SqlConnection GetConnection()
         {
-            string connString = HoneypotSettings.Settings.SQLConnectionString;
+            string connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString.Replace("\\\\", "\\");
+
 
             SqlConnection connection = new SqlConnection(connString);
 
