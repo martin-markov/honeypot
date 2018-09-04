@@ -10,7 +10,7 @@
 </style>
 <script type="text/javascript">
     function longDataFormatter(cellvalue, options, rowObject) {
-        var originalVal = "<span style='display:none'>" + cellvalue + "</span>"
+        var originalVal = "<button style='display: none' onclick='hideData(this)'>Hide data</button><span style='display:none'>" + cellvalue + "</span>"
         var hideElem = "<button onclick='showData(this)'>Show data</button>"
         return hideElem + originalVal;
     }
@@ -26,6 +26,17 @@
         if (elem) {
             $(elem).hide();
             $(elem).siblings().first().show();
+            $(elem).siblings().last().show();
+            resizeGrid();
+        }
+    }
+
+    function hideData(elem) {
+        if (elem) {
+            $(elem).hide();
+            $(elem).siblings().first().show();
+            $(elem).siblings().last().hide();
+
             resizeGrid();
         }
     }
@@ -84,12 +95,10 @@
         .SetCustomFormatter("actionFormatter")
         .SetAlign(MvcJqGrid.Enums.Align.Center))
     .SetUrl(Url.Action("List", "Home"))
-        //.SetAutoWidth(true)
     .SetRowNum(30)
     .SetRowList(new[] { 30, 50, 100 })
     .SetViewRecords(true)
     .SetPager("jqPager")
-    .SetPgButtons(true)
     .SetSortOnHeaderClick(true)
     .SetShrinkToFit(true)
     .SetShowAllSortIcons(true)
